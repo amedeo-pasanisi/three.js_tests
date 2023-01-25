@@ -54,7 +54,7 @@ fontLoader.load(
 
         // Text
         const textGeometry = new TextGeometry(
-            'AMEDEO',
+            'EIH',
             {
                 font: font,
                 size: 0.5,
