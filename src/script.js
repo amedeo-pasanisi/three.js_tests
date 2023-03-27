@@ -7,21 +7,14 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 
 /**
- * Base
-*/
-
-/**
  * Debug
  */
 const gui = new dat.GUI({
     closed: true
 })
 gui.hide()
-
-window.addEventListener('keydown', (event) =>
-{
-    if(event.key === 'h')
-    {
+window.addEventListener('keydown', (event) => {
+    if(event.key === 'h') {
         if(gui._hidden)
             gui.show()
         else
@@ -47,11 +40,9 @@ const matcapTexture = textureLoader.load('textures/matcaps/8.png')
 const fontLoader = new FontLoader()
 fontLoader.load(
     '/fonts/helvetiker_regular.typeface.json',
-    (font) =>
-    {
+    (font) => {
         // Material
         const material = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
-
         // Text
         const textGeometry = new TextGeometry(
             'EIH',
@@ -70,7 +61,6 @@ fontLoader.load(
         textGeometry.center()
         const text = new THREE.Mesh(textGeometry, material)
         scene.add(text)
-
         // Donuts
         const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 32, 64)
         for(let i = 0; i < 100; i++)
@@ -95,17 +85,13 @@ const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 }
-
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
-
     // Update camera
     camera.aspect = sizes.width / sizes.height
     camera.updateProjectionMatrix()
-    
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -114,7 +100,6 @@ window.addEventListener('resize', () =>
 /**
  * Camera
 */
-// Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.z = 4
 scene.add(camera)
@@ -132,23 +117,16 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-
 /**
  * Animate
  */
 const clock = new THREE.Clock()
-
-
-const tick = () =>
-{
+const tick = () => {
     const elapsedTime = clock.getElapsedTime()
-
     // Update controls
     controls.update()
-
     // Render
     renderer.render(scene, camera)
-
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
 }
